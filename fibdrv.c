@@ -27,6 +27,8 @@ static DEFINE_MUTEX(fib_mutex);
 static long long fib_sequence(long long k)
 {
     long long a = 0, b = 1;
+    if (k == 0)
+        return a;
     for (int i = ((sizeof(long long) << 3) - __builtin_clzll(k)); i >= 1; i--) {
         long long t1 = a * ((b << 1) - a);
         long long t2 = b * b + a * a;
